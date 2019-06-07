@@ -10,6 +10,7 @@ import ReMVVM
 import RxSwift
 
 extension ReMVVM: ReactiveCompatible { }
+extension Store: ReactiveCompatible { } 
 
 extension Reactive: ObserverType where Base: StoreActionDispatcher {
     public func on(_ event: Event<StoreAction>) {
