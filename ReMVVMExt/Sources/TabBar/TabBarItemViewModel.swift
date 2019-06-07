@@ -1,0 +1,28 @@
+//
+//  TabBarItemViewModel.swift
+//  BNCommon
+//
+//  Created by Grzegorz Jurzak on 13/02/2019.
+//  Copyright © 2019 HYD. All rights reserved.
+//
+
+import RxSwift
+import ReMVVM
+
+public struct TabBarItemViewModel {
+
+    public let title: Observable<String>
+
+    public let iconImage: Observable<Data>
+
+    public let isSelected: Observable<Bool>
+
+    public let action: Observable<StoreAction>
+
+    public init<Tab: NavigationTab>(tab: Tab, isSelected: Bool) {
+        title = .just(tab.title)
+        iconImage = .just(tab.iconImage)
+        self.isSelected = .just(isSelected)
+        action = .just(tab.action)
+    }
+}
