@@ -36,12 +36,13 @@ public struct DismissModalMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func applyMiddleware<State>(for state: State,
-                                       action: StoreAction,
-                                       dispatcher: AnyDispatcher<State>) where State: StoreState {
+    public func next<State>(for state: State,
+                            action: StoreAction,
+                            middlewares: AnyMiddlewares<State>,
+                            dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? DismissModal else {
-            dispatcher.next()
+            middlewares.next()
             return
         }
 
@@ -49,7 +50,7 @@ public struct DismissModalMiddleware: AnyMiddleware {
 
         guard !uiState.modalControllers.isEmpty else { return }
 
-        dispatcher.next { _ in
+        middlewares.next { _ in
             // side effect
 
             //dismiss not needed modals

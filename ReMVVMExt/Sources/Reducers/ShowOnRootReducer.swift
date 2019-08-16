@@ -32,18 +32,19 @@ public struct ShowOnRootMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func applyMiddleware<State>(for state: State,
-                                       action: StoreAction,
-                                       dispatcher: AnyDispatcher<State>) where State: StoreState {
+    public func next<State>(for state: State,
+                            action: StoreAction,
+                            middlewares: AnyMiddlewares<State>,
+                            dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? ShowOnRoot else {
-            dispatcher.next()
+            middlewares.next()
             return
         }
 
         let uiState = self.uiState
 
-        dispatcher.next { _ in // newState - state variable is used below 
+        middlewares.next { _ in // newState - state variable is used below
             // side effect
 
             uiState.setRoot(controller: action.controllerInfo.controller,

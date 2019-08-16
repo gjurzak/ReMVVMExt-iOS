@@ -34,12 +34,13 @@ public struct ShowModalMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func applyMiddleware<State>(for state: State,
-                                       action: StoreAction,
-                                       dispatcher: AnyDispatcher<State>) where State: StoreState {
+    public func next<State>(for state: State,
+                            action: StoreAction,
+                            middlewares: AnyMiddlewares<State>,
+                            dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? ShowModal else {
-            dispatcher.next()
+            middlewares.next()
             return
         }
 
@@ -52,7 +53,7 @@ public struct ShowModalMiddleware: AnyMiddleware {
             return
         }
 
-        dispatcher.next { state in
+        middlewares.next { state in
             // side effect
             guard let state = state as? NavigationTreeContainingState else { return }
 
