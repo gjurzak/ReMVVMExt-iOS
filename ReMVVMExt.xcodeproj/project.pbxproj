@@ -25,6 +25,13 @@
 		0825183222AA995B0062A4EB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0825182D22AA995B0062A4EB /* RxCocoa.framework */; };
 		0825183422AA9B730062A4EB /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183322AA9B730062A4EB /* UIState.swift */; };
 		0825184322AA9E300062A4EB /* ReMVVMExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825184222AA9E300062A4EB /* ReMVVMExtension.swift */; };
+		8CC32405231FAE0B008A49EB /* TabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183622AA9BA50062A4EB /* TabBarItemViewModel.swift */; };
+		8CC32406231FAE0B008A49EB /* TabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0825183722AA9BA50062A4EB /* TabBarItemView.xib */; };
+		8CC32407231FAE0B008A49EB /* TabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183822AA9BA50062A4EB /* TabBarItemView.swift */; };
+		8CC32408231FAE0B008A49EB /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183922AA9BA50062A4EB /* TabBarViewModel.swift */; };
+		8CC32409231FAE0B008A49EB /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0825183A22AA9BA50062A4EB /* TabBar.storyboard */; };
+		8CC3240A231FAE0B008A49EB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183B22AA9BA50062A4EB /* TabBarViewController.swift */; };
+		8CC3240B231FB0F0008A49EB /* ShowTabReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825181922AA90C50062A4EB /* ShowTabReducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -222,6 +229,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC32409231FAE0B008A49EB /* TabBar.storyboard in Resources */,
+				8CC32406231FAE0B008A49EB /* TabBarItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,14 +241,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC3240A231FAE0B008A49EB /* TabBarViewController.swift in Sources */,
 				0825181E22AA90C50062A4EB /* ReMVVM+Rx.swift in Sources */,
+				8CC32407231FAE0B008A49EB /* TabBarItemView.swift in Sources */,
 				0825182122AA90C50062A4EB /* PushReducer.swift in Sources */,
 				0825184322AA9E300062A4EB /* ReMVVMExtension.swift in Sources */,
 				0825182222AA90C50062A4EB /* PopReducer.swift in Sources */,
+				8CC32405231FAE0B008A49EB /* TabBarItemViewModel.swift in Sources */,
 				0825181F22AA90C50062A4EB /* StoreActions.swift in Sources */,
 				0825183422AA9B730062A4EB /* UIState.swift in Sources */,
 				0825181D22AA90C50062A4EB /* NavigationTree.swift in Sources */,
+				8CC3240B231FB0F0008A49EB /* ShowTabReducer.swift in Sources */,
 				0825182622AA90C50062A4EB /* ShowOnRootReducer.swift in Sources */,
+				8CC32408231FAE0B008A49EB /* TabBarViewModel.swift in Sources */,
 				0825182722AA90C50062A4EB /* ConvertActionMiddleware.swift in Sources */,
 				0825182522AA90C50062A4EB /* ShowModalReducer.swift in Sources */,
 				0825182022AA90C50062A4EB /* SynchronizeStateReducer.swift in Sources */,
@@ -388,6 +402,7 @@
 				);
 				INFOPLIST_FILE = ReMVVMExt/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -418,6 +433,7 @@
 				);
 				INFOPLIST_FILE = ReMVVMExt/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -22,7 +22,7 @@ public enum ReMVVMExtension {
             ShowModalMiddleware(uiState: uiState),
             DismissModalMiddleware(uiState: uiState),
             ShowOnRootMiddleware(uiState: uiState),
-            //ShowOnTabMiddleware(uiState: uiState),
+            ShowOnTabMiddleware(uiState: uiState),
             PushMiddleware(uiState: uiState),
             PopMiddleware(uiState: uiState),
             SynchronizeStateMiddleware(uiState: uiState)

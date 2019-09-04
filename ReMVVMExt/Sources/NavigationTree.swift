@@ -63,7 +63,7 @@ public enum NavigationTreeReducer {
     static let reducer = AnyReducer(with: reducers)
     static let reducers: [AnyReducer<NavigationTree>] = [
         ShowOnRootReducer.any,
-        //ShowOnTabReducer.any,
+        ShowOnTabReducer.any,
         SynchronizeStateReducer.any,
         PushReducer.any,
         PopReducer.any,

@@ -6,13 +6,13 @@
 //  Copyright © 2019 HYD. All rights reserved.
 //
 
-//import BNCommon
+import Loaders
 import ReMVVM
 import RxCocoa
 import RxSwift
 import UIKit
 
-class TabBarItemView: UIView, NibLoadableView, ViewModelDriven, ReMVVMDriven {
+class TabBarItemView: UIView, ReMVVMDriven {
 
     var viewModel: TabBarItemViewModel? {
         didSet {
@@ -42,6 +42,15 @@ class TabBarItemView: UIView, NibLoadableView, ViewModelDriven, ReMVVMDriven {
             .disposed(by: disposeBag)
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        Nib.add(to: self)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        Nib.add(to: self)
+    }
 }
 
 private extension Reactive where Base: TabBarItemView {

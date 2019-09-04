@@ -16,13 +16,13 @@ struct ShowOnRootReducer: Reducer {
     }
 }
 
-//struct ShowOnTabReducer: Reducer {
-//
-//    public static func reduce(state: NavigationTree, with action: ShowOnTab) -> NavigationTree {
-//
-//        return NavigationTree(stack: [action.controllerInfo.factory], modals: [])
-//    }
-//}
+struct ShowOnTabReducer: Reducer {
+
+    public static func reduce(state: NavigationTree, with action: ShowOnTab) -> NavigationTree {
+
+        return NavigationTree(stack: [action.controllerInfo.factory], modals: [])
+    }
+}
 
 public struct ShowOnRootMiddleware: AnyMiddleware {
 

@@ -59,30 +59,3 @@ extension Array where Element: NavigationTab {
         return map { $0.any }
     }
 }
-
-public enum NavigationTabb: String, CaseIterable {
-
-    case discover = "Discover"
-    case chats = "Chats"
-    case profile = "Profile"
-
-    public var title: String {
-        return self.rawValue
-    }
-
-    public var iconImageName: String {
-        switch self {
-        case .discover:
-            return "tab_bar_discover"
-        case .chats:
-            return "tab_bar_chats"
-        case .profile:
-            return "tab_bar_profile"
-        }
-    }
-
-    public var iconImage: Data {
-        fatalError()
-    }
-
-}

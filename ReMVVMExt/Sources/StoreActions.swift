@@ -31,24 +31,24 @@ public struct ShowOnRoot: StoreAction {
     }
 }
 
-//public struct ShowOnTab: StoreAction {
-//    public let controllerInfo: ControlerWithFactory
-//    public let navigationBarHidden: Bool
-//    public let tab: AnyNavigationTab
-//
-//    public init<Tab: NavigationTab>(tab: Tab,
-//                                    controller: UIViewController,
-//                                    factory: ViewModelFactory,
-//                                    animated: Bool = true,
-//                                    navigationBarHidden: Bool = true) {
-//
-//        self.controllerInfo = ControlerWithFactory(controller: controller,
-//                                                   factory: factory,
-//                                                   animated: animated)
-//        self.navigationBarHidden = navigationBarHidden
-//        self.tab = tab.any
-//    }
-//}
+public struct ShowOnTab: StoreAction {
+    public let controllerInfo: ControlerWithFactory
+    public let navigationBarHidden: Bool
+    public let tab: AnyNavigationTab
+
+    public init<Tab: NavigationTab>(tab: Tab,
+                                    controller: UIViewController,
+                                    factory: ViewModelFactory,
+                                    animated: Bool = true,
+                                    navigationBarHidden: Bool = true) {
+
+        self.controllerInfo = ControlerWithFactory(controller: controller,
+                                                   factory: factory,
+                                                   animated: animated)
+        self.navigationBarHidden = navigationBarHidden
+        self.tab = tab.any
+    }
+}
 
 public struct Push: StoreAction {
 

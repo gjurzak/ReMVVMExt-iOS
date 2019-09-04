@@ -6,29 +6,31 @@
 //  Copyright © 2019 HYD. All rights reserved.
 //
 
+import Loaders
 import ReMVVM
 import RxCocoa
 import RxSwift
 import UIKit
 
-class TabBarViewController: UIViewController, ReMVVMDriven {
+public class TabBarViewController: UIViewController, ReMVVMDriven {
 
+    public var tabItemCreator: (() -> UIView)?
     @IBOutlet private var tabBarStackView: UIStackView!
 
     private var disposeBag = DisposeBag()
 
-    override var childForStatusBarStyle: UIViewController? {
+    override public var childForStatusBarStyle: UIViewController? {
         return findNavigationController()?.topViewController
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         guard let viewModel: TabBarViewModel = remvvm.viewModel(for: self) else { return }
         bind(viewModel)
     }
 
-    public override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         disposeBag = DisposeBag()
     }
@@ -36,11 +38,19 @@ class TabBarViewController: UIViewController, ReMVVMDriven {
     private func bind(_ viewModel: TabBarViewModel) {
 
         viewModel.tabBarItemsViewModels
-            .map { $0.map { TabBarItemView.loadViewFromNib(with: $0) } }
+            .map { [unowned self] in $0.map { self.tabBarItem(for: $0) } }
             .bind(to: tabBarStackView.rx.items)
             .disposed(by: disposeBag)
     }
 
+    private func tabBarItem(for viewModel: TabBarItemViewModel) -> UIView {
+        if let tabItemCreator = tabItemCreator {
+            return tabItemCreator()
+        }
+        let view = TabBarItemView(frame: CGRect.zero)
+        view.viewModel = viewModel
+        return view
+    }
 }
 
 extension Reactive where Base: UIStackView {
