@@ -54,7 +54,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
         if let tabController = uiState.rootViewController as? TabBarViewController {
             tabController.findNavigationController()?
                 .setViewControllers([tabAction.controllerInfo.controller],
-                                    animated: tabAction.controllerInfo.animated)
+                                    animated: false)
         } else {
             let tabViewController: UIViewController = TabBarStoryboards.TabBar.initialViewController()
             tabViewController.loadViewIfNeeded()
