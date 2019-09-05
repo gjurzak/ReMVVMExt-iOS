@@ -56,7 +56,7 @@
                         <viewLayoutGuide key="safeArea" id="TrL-Zq-Qfe"/>
                     </view>
                     <connections>
-                        <outlet property="tabBarStackView" destination="4uX-eN-6hC" id="4LU-YB-xeh"/>
+                        <outlet property="tabBarStackView" destination="4uX-eN-6hC" id="IIg-T4-QBA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oM7-ql-4Od" userLabel="First Responder" sceneMemberID="firstResponder"/>

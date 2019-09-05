@@ -65,6 +65,11 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
             uiState.setRoot(controller: tabViewController,
                             animated: tabAction.controllerInfo.animated,
                             navigationBarHidden: tabAction.navigationBarHidden)
+
+            dispatcher.dispatch(action: ShowOnRoot(controller: tabViewController,
+                                                   factory: tabAction.controllerInfo.factory,
+                                                   animated: tabAction.controllerInfo.animated,
+                                                   navigationBarHidden: tabAction.navigationBarHidden))
         }
 
         // dismiss modals

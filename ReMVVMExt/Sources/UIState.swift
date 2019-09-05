@@ -82,7 +82,6 @@ public final class UIState {
 }
 
 extension UIViewController {
-    //todo dg
     func findNavigationController(for controller: UIViewController? = nil) -> UINavigationController? {
         let controller = controller ?? self
         if let navigation = controller as? UINavigationController {
