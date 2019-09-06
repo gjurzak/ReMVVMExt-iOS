@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class TabBarItemView: UIView, ReMVVMDriven {
+open class TabBarItemView: UIView, ReMVVMDriven {
 
     var viewModel: TabBarItemViewModel? {
         didSet {
@@ -29,26 +29,35 @@ class TabBarItemView: UIView, ReMVVMDriven {
 
     private func bind(_ viewModel: TabBarItemViewModel) {
         viewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
-        viewModel.iconImage.map { UIImage(data: $0) }.bind(to: iconImageView.rx.image).disposed(by: disposeBag)
+        viewModel.isSelected.map { [weak self] isSelected in isSelected ? self?.tintColor : UIColor.lightGray }
+            .subscribe(onNext: { [weak self] color in
+                self?.iconImageView.tintColor = color
+            })
+            .disposed(by: disposeBag)
+        viewModel.iconImage.map { UIImage(data: $0)?.withRenderingMode(.alwaysTemplate) }.bind(to: iconImageView.rx.image).disposed(by: disposeBag)
 
         let alpha = viewModel.isSelected.map { CGFloat($0 ? 1.0 : 0.5) }
         alpha.bind(to: titleLabel.rx.alpha).disposed(by: disposeBag)
         alpha.bind(to: iconImageView.rx.alpha).disposed(by: disposeBag)
 
         rx.tap
-            .skipUntil(viewModel.isSelected)
+            .skipUntil(viewModel.isSelected).debug()
             .withLatestFrom(viewModel.action)
             .bind(to: remvvm.rx)
             .disposed(by: disposeBag)
     }
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-        Nib.add(to: self)
+        setupNib()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupNib()
+    }
+
+    open func setupNib() {
         Nib.add(to: self)
     }
 }

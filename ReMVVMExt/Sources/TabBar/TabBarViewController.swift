@@ -44,10 +44,7 @@ public class TabBarViewController: UIViewController, ReMVVMDriven {
     }
 
     private func tabBarItem(for viewModel: TabBarItemViewModel) -> UIView {
-        if let tabItemCreator = tabItemCreator {
-            return tabItemCreator()
-        }
-        let view = TabBarItemView(frame: CGRect.zero)
+        let view = (tabItemCreator?() as? TabBarItemView) ?? TabBarItemView(frame: CGRect.zero)
         view.viewModel = viewModel
         return view
     }

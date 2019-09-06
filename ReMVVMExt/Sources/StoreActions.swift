@@ -34,10 +34,12 @@ public struct ShowOnRoot: StoreAction {
 public struct ShowOnTab: StoreAction {
     public let controllerInfo: ControlerWithFactory
     public let navigationBarHidden: Bool
+    public let tabItemCreator: (() -> UIView)?
     public let tab: AnyNavigationTab
 
     public init<Tab: NavigationTab>(tab: Tab,
                                     controller: UIViewController,
+                                    tabItemCreator: (() -> UIView)? = nil,
                                     factory: ViewModelFactory,
                                     animated: Bool = true,
                                     navigationBarHidden: Bool = true) {
@@ -47,6 +49,7 @@ public struct ShowOnTab: StoreAction {
                                                    animated: animated)
         self.navigationBarHidden = navigationBarHidden
         self.tab = tab.any
+        self.tabItemCreator = tabItemCreator
     }
 }
 
