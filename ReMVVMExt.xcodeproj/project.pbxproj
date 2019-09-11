@@ -25,6 +25,7 @@
 		0825183222AA995B0062A4EB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0825182D22AA995B0062A4EB /* RxCocoa.framework */; };
 		0825183422AA9B730062A4EB /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183322AA9B730062A4EB /* UIState.swift */; };
 		0825184322AA9E300062A4EB /* ReMVVMExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825184222AA9E300062A4EB /* ReMVVMExtension.swift */; };
+		8C45B5FF23293259004B4645 /* Loaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45B5FE23293259004B4645 /* Loaders.framework */; };
 		8CC32405231FAE0B008A49EB /* TabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183622AA9BA50062A4EB /* TabBarItemViewModel.swift */; };
 		8CC32406231FAE0B008A49EB /* TabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0825183722AA9BA50062A4EB /* TabBarItemView.xib */; };
 		8CC32407231FAE0B008A49EB /* TabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183822AA9BA50062A4EB /* TabBarItemView.swift */; };
@@ -62,6 +63,7 @@
 		0825183A22AA9BA50062A4EB /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		0825183B22AA9BA50062A4EB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0825184222AA9E300062A4EB /* ReMVVMExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReMVVMExtension.swift; sourceTree = "<group>"; };
+		8C45B5FE23293259004B4645 /* Loaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Loaders.framework; path = ../Carthage/Build/iOS/Loaders.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0825182E22AA995B0062A4EB /* RxSwift.framework in Frameworks */,
+				8C45B5FF23293259004B4645 /* Loaders.framework in Frameworks */,
 				0825182F22AA995B0062A4EB /* ReMVVM.framework in Frameworks */,
 				0825183022AA995B0062A4EB /* RxRelay.framework in Frameworks */,
 				0825183122AA995B0062A4EB /* MVVM.framework in Frameworks */,
@@ -139,6 +142,7 @@
 		0825182822AA995B0062A4EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C45B5FE23293259004B4645 /* Loaders.framework */,
 				0825182C22AA995B0062A4EB /* MVVM.framework */,
 				0825182A22AA995B0062A4EB /* ReMVVM.framework */,
 				0825182D22AA995B0062A4EB /* RxCocoa.framework */,
