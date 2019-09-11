@@ -34,7 +34,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.13593381639999999" green="0.3348748386" blue="0.60506075619999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="4uX-eN-6hC" firstAttribute="leading" secondItem="Y12-jo-HSO" secondAttribute="leading" id="8D5-mC-LWV"/>
                                     <constraint firstAttribute="trailing" secondItem="4uX-eN-6hC" secondAttribute="trailing" id="BLL-Us-a8v"/>
