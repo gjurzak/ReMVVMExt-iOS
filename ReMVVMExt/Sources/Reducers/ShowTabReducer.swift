@@ -9,6 +9,12 @@
 import Loaders
 import ReMVVM
 
+public struct TabBarConfig {
+    public static var tabBarViewController: (() -> UIViewController) = {
+        return TabBarStoryboards.TabBar.initialViewController()
+    }
+}
+
 public enum NavigationTabReducer {
     public static func reduce(state: AnyNavigationTab?, with action: StoreAction) -> AnyNavigationTab? {
         return reducer.reduce(state: state, with: action)
@@ -60,7 +66,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
                 .setViewControllers([tabAction.controllerInfo.controller],
                                     animated: false)
         } else {
-            let tabViewController: UIViewController = TabBarStoryboards.TabBar.initialViewController()
+            let tabViewController: UIViewController = TabBarConfig.tabBarViewController()
             (tabViewController as? TabBarViewController)?.tabItemCreator = tabAction.tabItemCreator
             tabViewController.loadViewIfNeeded()
             tabViewController.findNavigationController()?

@@ -27,26 +27,6 @@ open class TabBarItemView: UIView, ReMVVMDriven {
 
     private let disposeBag = DisposeBag()
 
-    private func bind(_ viewModel: TabBarItemViewModel) {
-        viewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
-        viewModel.isSelected.map { [weak self] isSelected in isSelected ? self?.tintColor : UIColor.lightGray }
-            .subscribe(onNext: { [weak self] color in
-                self?.iconImageView.tintColor = color
-            })
-            .disposed(by: disposeBag)
-        viewModel.iconImage.map { UIImage(data: $0)?.withRenderingMode(.alwaysTemplate) }.bind(to: iconImageView.rx.image).disposed(by: disposeBag)
-
-        let alpha = viewModel.isSelected.map { CGFloat($0 ? 1.0 : 0.5) }
-        alpha.bind(to: titleLabel.rx.alpha).disposed(by: disposeBag)
-        alpha.bind(to: iconImageView.rx.alpha).disposed(by: disposeBag)
-
-        rx.tap
-            .skipUntil(viewModel.isSelected).debug()
-            .withLatestFrom(viewModel.action)
-            .bind(to: remvvm.rx)
-            .disposed(by: disposeBag)
-    }
-
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setupNib()
@@ -57,8 +37,25 @@ open class TabBarItemView: UIView, ReMVVMDriven {
         setupNib()
     }
 
+    open func selectionChanged(isSelected: Bool) {}
+
     open func setupNib() {
         Nib.add(to: self)
+    }
+
+    private func bind(_ viewModel: TabBarItemViewModel) {
+        viewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
+        Observable.combineLatest(viewModel.isSelected, viewModel.iconImage, viewModel.iconImageActive)
+            .map { $0.0 ? $0.2 : $0.1 }
+            .map { UIImage(data: $0) }
+            .bind(to: iconImageView.rx.image)
+            .disposed(by: disposeBag)
+        rx.tap
+            .skipUntil(viewModel.isSelected).debug()
+            .withLatestFrom(viewModel.action)
+            .bind(to: remvvm.rx)
+            .disposed(by: disposeBag)
+        viewModel.isSelected.subscribe(onNext: selectionChanged).disposed(by: disposeBag)
     }
 }
 

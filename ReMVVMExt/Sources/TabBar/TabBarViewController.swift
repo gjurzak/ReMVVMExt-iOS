@@ -12,25 +12,25 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-public class TabBarViewController: UIViewController, ReMVVMDriven {
+open class TabBarViewController: UIViewController, ReMVVMDriven {
 
-    public var tabItemCreator: (() -> UIView)?
+    open var tabItemCreator: (() -> UIView)?
     @IBOutlet private var tabBarStackView: UIStackView!
 
     private var disposeBag = DisposeBag()
 
-    override public var childForStatusBarStyle: UIViewController? {
+    override open var childForStatusBarStyle: UIViewController? {
         return findNavigationController()?.topViewController
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         guard let viewModel: TabBarViewModel = remvvm.viewModel(for: self) else { return }
         bind(viewModel)
     }
 
-    override public func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         disposeBag = DisposeBag()
     }
