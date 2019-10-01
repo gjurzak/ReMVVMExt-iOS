@@ -33,12 +33,14 @@ public struct AnyNavigationTab: NavigationTab {
 
     public let title: String
     public let iconImage: Data
+    public let iconImageActive: Data
     public let action: StoreAction
 }
 
 public protocol NavigationTab: Equatable {
     var title: String { get }
     var iconImage: Data { get }
+    var iconImageActive: Data { get }
     var action: StoreAction { get }
 }
 
@@ -50,6 +52,7 @@ extension NavigationTab {
     public var any: AnyNavigationTab {
         return AnyNavigationTab(title: title,
                                 iconImage: iconImage,
+                                iconImageActive: iconImageActive,
                                 action: action)
     }
 }

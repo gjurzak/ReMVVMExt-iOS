@@ -14,6 +14,7 @@ public struct TabBarItemViewModel {
     public let title: Observable<String>
 
     public let iconImage: Observable<Data>
+    public let iconImageActive: Observable<Data>
 
     public let isSelected: Observable<Bool>
 
@@ -22,6 +23,7 @@ public struct TabBarItemViewModel {
     public init<Tab: NavigationTab>(tab: Tab, isSelected: Bool) {
         title = .just(tab.title)
         iconImage = .just(tab.iconImage)
+        iconImageActive = .just(tab.iconImageActive)
         self.isSelected = .just(isSelected)
         action = .just(tab.action)
     }
