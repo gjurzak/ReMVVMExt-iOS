@@ -11,7 +11,7 @@ import ReMVVM
 
 public struct TabBarConfig {
     public static var tabBarViewController: (() -> UIViewController) = {
-        return TabBarStoryboards.TabBar.initialViewController()
+        return TabBarStoryboards.TabBar.instantiateInitialViewController()
     }
 }
 
@@ -50,7 +50,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func next<State>(for state: State, action: StoreAction, middlewares: AnyMiddlewares<State>, dispatcher: StoreActionDispatcher) where State : StoreState {
+    public func onNext<State>(for state: State, action: StoreAction, middlewares: AnyMiddlewares<State>, dispatcher: StoreActionDispatcher) where State : StoreState {
 
         guard let state = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
             middlewares.next(action: action)

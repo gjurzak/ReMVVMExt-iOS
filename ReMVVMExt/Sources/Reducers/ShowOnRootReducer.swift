@@ -32,7 +32,7 @@ public struct ShowOnRootMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func next<State>(for state: State,
+    public func onNext<State>(for state: State,
                             action: StoreAction,
                             middlewares: AnyMiddlewares<State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {

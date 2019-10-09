@@ -29,7 +29,7 @@ public final class SynchronizeStateMiddleware: AnyMiddleware {
 
     private var disposeBag = DisposeBag()
 
-    public func next<State>(for state: State,
+    public func onNext<State>(for state: State,
                             action: StoreAction,
                             middlewares: AnyMiddlewares<State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
