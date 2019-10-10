@@ -25,6 +25,7 @@
 		0825183222AA995B0062A4EB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0825182D22AA995B0062A4EB /* RxCocoa.framework */; };
 		0825183422AA9B730062A4EB /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183322AA9B730062A4EB /* UIState.swift */; };
 		0825184322AA9E300062A4EB /* ReMVVMExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825184222AA9E300062A4EB /* ReMVVMExtension.swift */; };
+		08C7B5C1234FBD8D000CDF1E /* ViewModelProvided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7B5C0234FBD8D000CDF1E /* ViewModelProvided.swift */; };
 		8C45B5FF23293259004B4645 /* Loaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C45B5FE23293259004B4645 /* Loaders.framework */; };
 		8CC32405231FAE0B008A49EB /* TabBarItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825183622AA9BA50062A4EB /* TabBarItemViewModel.swift */; };
 		8CC32406231FAE0B008A49EB /* TabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0825183722AA9BA50062A4EB /* TabBarItemView.xib */; };
@@ -63,6 +64,7 @@
 		0825183A22AA9BA50062A4EB /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		0825183B22AA9BA50062A4EB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0825184222AA9E300062A4EB /* ReMVVMExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReMVVMExtension.swift; sourceTree = "<group>"; };
+		08C7B5C0234FBD8D000CDF1E /* ViewModelProvided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelProvided.swift; sourceTree = "<group>"; };
 		8C45B5FE23293259004B4645 /* Loaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Loaders.framework; path = ../Carthage/Build/iOS/Loaders.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 				0825181422AA90C50062A4EB /* Reducers */,
 				0825183522AA9BA50062A4EB /* TabBar */,
 				0825181222AA90C50062A4EB /* ReMVVM+Rx.swift */,
+				08C7B5C0234FBD8D000CDF1E /* ViewModelProvided.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				0825183422AA9B730062A4EB /* UIState.swift in Sources */,
 				0825181D22AA90C50062A4EB /* NavigationTree.swift in Sources */,
 				8CC3240B231FB0F0008A49EB /* ShowTabReducer.swift in Sources */,
+				08C7B5C1234FBD8D000CDF1E /* ViewModelProvided.swift in Sources */,
 				0825182622AA90C50062A4EB /* ShowOnRootReducer.swift in Sources */,
 				8CC32408231FAE0B008A49EB /* TabBarViewModel.swift in Sources */,
 				0825182722AA90C50062A4EB /* ConvertActionMiddleware.swift in Sources */,
