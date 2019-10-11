@@ -54,17 +54,17 @@ public struct PushMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State,
                             action: StoreAction,
-                            middlewares: AnyMiddlewares<State>,
+                            interceptor: MiddlewareInterceptor<StoreAction, State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? Push else {
-            middlewares.next()
+            interceptor.next()
             return
         }
 
         let uiState = self.uiState
 
-        middlewares.next { state in
+        interceptor.next { state in
             // side effect
             guard let state = state as? NavigationTreeContainingState else { return }
 

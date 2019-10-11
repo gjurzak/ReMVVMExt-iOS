@@ -36,11 +36,11 @@ public struct ShowModalMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State,
                             action: StoreAction,
-                            middlewares: AnyMiddlewares<State>,
+                            interceptor: MiddlewareInterceptor<StoreAction, State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? ShowModal else {
-            middlewares.next()
+            interceptor.next()
             return
         }
 
@@ -53,7 +53,7 @@ public struct ShowModalMiddleware: AnyMiddleware {
             return
         }
 
-        middlewares.next { state in
+        interceptor.next { state in
             // side effect
             guard let state = state as? NavigationTreeContainingState else { return }
 

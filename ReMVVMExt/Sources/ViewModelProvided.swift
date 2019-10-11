@@ -8,6 +8,7 @@
 import Loaders
 import ReMVVM
 
+#if swift(>=5.1)
 @propertyWrapper
 public struct ViewModelProvided<VMD> where VMD: ViewModelDriven {
 
@@ -28,3 +29,4 @@ public struct ViewModelProvided<VMD> where VMD: ViewModelDriven {
         viewModel = Provided(key: key)
     }
 }
+#endif

@@ -48,17 +48,17 @@ public struct PopMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State,
                             action: StoreAction,
-                            middlewares: AnyMiddlewares<State>,
+                            interceptor: MiddlewareInterceptor<StoreAction, State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard let state = state as? NavigationTreeContainingState, let action = action as? Pop else {
-            middlewares.next()
+            interceptor.next()
             return
         }
 
         guard state.navigationTree.topStack.count > 1 else { return }
 
-        middlewares.next { _ in
+        interceptor.next { _ in
             // side effect
 
             switch action.mode {

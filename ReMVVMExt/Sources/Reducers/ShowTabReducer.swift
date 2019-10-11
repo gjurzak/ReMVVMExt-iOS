@@ -50,10 +50,10 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func onNext<State>(for state: State, action: StoreAction, middlewares: AnyMiddlewares<State>, dispatcher: StoreActionDispatcher) where State : StoreState {
+    public func onNext<State>(for state: State, action: StoreAction, interceptor: MiddlewareInterceptor<StoreAction, State>, dispatcher: StoreActionDispatcher) where State : StoreState {
 
         guard let state = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
-            middlewares.next(action: action)
+            interceptor.next(action: action)
             return
         }
 
@@ -83,7 +83,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
                                                    navigationBarHidden: tabAction.navigationBarHidden))
         }
 
-        middlewares.next(action: action)
+        interceptor.next(action: action)
 
         // dismiss modals
         uiState.rootViewController.dismiss(animated: true, completion: nil)

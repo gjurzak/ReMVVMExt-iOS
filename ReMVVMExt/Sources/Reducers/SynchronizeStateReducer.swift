@@ -31,11 +31,11 @@ public final class SynchronizeStateMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State,
                             action: StoreAction,
-                            middlewares: AnyMiddlewares<State>,
+                            interceptor: MiddlewareInterceptor<StoreAction, State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard let state = state as? NavigationTreeContainingState else {
-            middlewares.next()
+            interceptor.next()
             return
         }
 
@@ -44,9 +44,9 @@ public final class SynchronizeStateMiddleware: AnyMiddleware {
                     state.navigationTree.topStack.count > navigationCount
             else { return }
 
-            middlewares.next()
+            interceptor.next()
         } else {
-            middlewares.next { [weak self] _ in
+            interceptor.next { [weak self] _ in
                 let disposeBag = DisposeBag()
                 self?.disposeBag = disposeBag
                 self?.uiState.navigationController?.rx.didShow
