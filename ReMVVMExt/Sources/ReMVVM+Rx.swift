@@ -22,9 +22,8 @@ extension Reactive: ObserverType where Base: StoreActionDispatcher {
 extension Reactive where Base: StateAssociated, Base: AnyStateSubject {
 
     public var state: Observable<Base.State> {
-        let base = self.base
 
-        return Observable.create { observer in
+        return Observable.create { [base] observer in
             let subscriber = Subscriber(observer)
             base.add(subscriber: subscriber)
 
@@ -47,3 +46,19 @@ extension Reactive where Base: StateAssociated, Base: AnyStateSubject {
         }
     }
 }
+
+#if swift(>=5.1)
+@propertyWrapper
+public struct RxStoreState<T> {
+
+    public let wrappedValue: Observable<T>
+
+    public init() {
+        wrappedValue = State.remvvm.rx.state
+    }
+
+    private struct State: StateAssociated, ReMVVMDriven {
+        public typealias State = T
+    }
+}
+#endif
