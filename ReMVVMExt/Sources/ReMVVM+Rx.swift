@@ -19,11 +19,10 @@ extension Reactive: ObserverType where Base: StoreActionDispatcher {
     }
 }
 
-extension Reactive where Base: StateSubject & AnyStateSubject {
+extension Reactive where Base: StateAssociated, Base: AnyStateSubject {
 
     public var state: Observable<Base.State> {
         let base = self.base
-        guard let state = base.state else { return .empty() }
 
         return Observable.create { observer in
             let subscriber = Subscriber(observer)
@@ -33,7 +32,6 @@ extension Reactive where Base: StateSubject & AnyStateSubject {
                 base.remove(subscriber: subscriber)
             }
         }
-        .startWith(state)
         .share(replay: 1)
     }
 
@@ -44,7 +42,7 @@ extension Reactive where Base: StateSubject & AnyStateSubject {
             self.observer = observer
         }
 
-        func didChange(state: Base.State, oldState: Base.State) {
+        func didChange(state: Base.State, oldState: Base.State?) {
             observer.onNext(state)
         }
     }
