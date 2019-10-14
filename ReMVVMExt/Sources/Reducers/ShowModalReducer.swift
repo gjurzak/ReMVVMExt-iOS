@@ -36,7 +36,7 @@ public struct ShowModalMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State,
                             action: StoreAction,
-                            interceptor: MiddlewareInterceptor<StoreAction, State>,
+                            interceptor: Interceptor<StoreAction, State>,
                             dispatcher: StoreActionDispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? ShowModal else {

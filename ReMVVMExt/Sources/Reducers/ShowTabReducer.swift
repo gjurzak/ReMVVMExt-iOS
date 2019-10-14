@@ -50,7 +50,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func onNext<State>(for state: State, action: StoreAction, interceptor: MiddlewareInterceptor<StoreAction, State>, dispatcher: StoreActionDispatcher) where State : StoreState {
+    public func onNext<State>(for state: State, action: StoreAction, interceptor: Interceptor<StoreAction, State>, dispatcher: StoreActionDispatcher) where State : StoreState {
 
         guard let state = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
             interceptor.next(action: action)
@@ -59,38 +59,37 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
 
         guard state.currentTab != tabAction.tab else { return }
 
-        let uiState = self.uiState
+        interceptor.next(action: action) { [uiState] state in
 
-        if let tabController = uiState.rootViewController as? TabBarViewController {
-            tabController.findNavigationController()?
-                .setViewControllers([tabAction.controllerInfo.loader.load()],
-                                    animated: false)
-        } else {
-
-            let loader = Loader {
-                let tabViewController: UIViewController = TabBarConfig.tabBarViewController()
-                (tabViewController as? TabBarViewController)?.tabItemCreator = tabAction.tabItemCreator
-                tabViewController.loadViewIfNeeded()
-                tabViewController.findNavigationController()?
+            if let tabController = uiState.rootViewController as? TabBarViewController {
+                tabController.findNavigationController()?
                     .setViewControllers([tabAction.controllerInfo.loader.load()],
                                         animated: false)
+            } else {
 
-                uiState.setRoot(controller: tabViewController,
-                                animated: tabAction.controllerInfo.animated,
-                                navigationBarHidden: tabAction.navigationBarHidden)
-                return tabViewController
+                let loader = Loader {
+                    let tabViewController: UIViewController = TabBarConfig.tabBarViewController()
+                    (tabViewController as? TabBarViewController)?.tabItemCreator = tabAction.tabItemCreator
+                    tabViewController.loadViewIfNeeded()
+                    tabViewController.findNavigationController()?
+                        .setViewControllers([tabAction.controllerInfo.loader.load()],
+                                            animated: false)
+
+                    uiState.setRoot(controller: tabViewController,
+                                    animated: tabAction.controllerInfo.animated,
+                                    navigationBarHidden: tabAction.navigationBarHidden)
+                    return tabViewController
+                }
+
+                dispatcher.dispatch(action: ShowOnRoot(loader: loader,
+                                                       factory: tabAction.controllerInfo.factory,
+                                                       animated: tabAction.controllerInfo.animated,
+                                                       navigationBarHidden: tabAction.navigationBarHidden))
             }
 
-            dispatcher.dispatch(action: ShowOnRoot(loader: loader,
-                                                   factory: tabAction.controllerInfo.factory,
-                                                   animated: tabAction.controllerInfo.animated,
-                                                   navigationBarHidden: tabAction.navigationBarHidden))
+            // dismiss modals
+            uiState.rootViewController.dismiss(animated: true, completion: nil)
         }
-
-        interceptor.next(action: action)
-
-        // dismiss modals
-        uiState.rootViewController.dismiss(animated: true, completion: nil)
     }
 }
 
