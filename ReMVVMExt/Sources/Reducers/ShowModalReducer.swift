@@ -46,11 +46,14 @@ public struct ShowModalMiddleware: AnyMiddleware {
 
         let uiState = self.uiState
 
+        var controller: UIViewController?
         // block if already on screen
-        if !action.showOverSelfType, let modal = uiState.modalControllers.last,
-            type(of: modal) == type(of: action.controllerInfo.controller) {
-
-            return
+        // TODO use some id maybe ? 
+        if !action.showOverSelfType {
+            controller = action.controllerInfo.loader.load()
+            if let modal = uiState.modalControllers.last, type(of: modal) == type(of: controller!) {
+                return
+            }
         }
 
         interceptor.next { state in
@@ -61,19 +64,21 @@ public struct ShowModalMiddleware: AnyMiddleware {
             uiState.dismiss(animated: action.controllerInfo.animated,
                             number: uiState.modalControllers.count - state.navigationTree.modals.count + 1)
 
-            var controller = action.controllerInfo.controller
+            let newModal: UIViewController
             if action.withNavigationController {
 
                 let navController = uiState.config.navigation()
-                let viewController = action.controllerInfo.controller
+                let viewController = controller ?? action.controllerInfo.loader.load()
 
                 navController.viewControllers = [viewController]
                 navController.modalTransitionStyle = viewController.modalTransitionStyle
                 navController.modalPresentationStyle = viewController.modalPresentationStyle
-                controller = navController
+                newModal = navController
+            } else {
+                newModal = controller ?? action.controllerInfo.loader.load()
             }
 
-            uiState.present(controller, animated: action.controllerInfo.animated)
+            uiState.present(newModal, animated: action.controllerInfo.animated)
         }
     }
 }

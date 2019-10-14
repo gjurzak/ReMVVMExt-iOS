@@ -6,6 +6,7 @@
 //  Copyright © 2019. All rights reserved.
 //
 
+import Loaders
 import ReMVVM
 import RxSwift
 
@@ -16,37 +17,37 @@ public struct SynchronizeState: StoreAction {
 public struct ShowOnRoot: StoreAction {
 
     //public let root: NavigationRoot
-    public let controllerInfo: ControlerWithFactory
+    public let controllerInfo: LoaderWithFactory
     public let navigationBarHidden: Bool
 
-    public init(controller: UIViewController,
+    public init(loader: Loader<UIViewController>,
                 factory: ViewModelFactory,
                 animated: Bool = true,
                 navigationBarHidden: Bool = true) {
 
-        self.controllerInfo = ControlerWithFactory(controller: controller,
-                                                       factory: factory,
-                                                       animated: animated)
+        self.controllerInfo = LoaderWithFactory(loader: loader,
+                                                factory: factory,
+                                                animated: animated)
         self.navigationBarHidden = navigationBarHidden
     }
 }
 
 public struct ShowOnTab: StoreAction {
-    public let controllerInfo: ControlerWithFactory
+    public let controllerInfo: LoaderWithFactory
     public let navigationBarHidden: Bool
     public let tabItemCreator: (() -> UIView)?
     public let tab: AnyNavigationTab
 
     public init<Tab: NavigationTab>(tab: Tab,
-                                    controller: UIViewController,
+                                    loader: Loader<UIViewController>,
                                     tabItemCreator: (() -> UIView)? = nil,
                                     factory: ViewModelFactory,
                                     animated: Bool = true,
                                     navigationBarHidden: Bool = true) {
 
-        self.controllerInfo = ControlerWithFactory(controller: controller,
-                                                   factory: factory,
-                                                   animated: animated)
+        self.controllerInfo = LoaderWithFactory(loader: loader,
+                                                factory: factory,
+                                                animated: animated)
         self.navigationBarHidden = navigationBarHidden
         self.tab = tab.any
         self.tabItemCreator = tabItemCreator
@@ -55,16 +56,16 @@ public struct ShowOnTab: StoreAction {
 
 public struct Push: StoreAction {
 
-    public let controllerInfo: ControlerWithFactory
+    public let controllerInfo: LoaderWithFactory
     public let pop: PopMode?
-    public init(controller: UIViewController,
+    public init(loader: Loader<UIViewController>,
                 factory: ViewModelFactory,
                 pop: PopMode? = nil,
                 animated: Bool = true) {
         self.pop = pop
-        self.controllerInfo = ControlerWithFactory(controller: controller,
-                                                       factory: factory,
-                                                       animated: animated)
+        self.controllerInfo = LoaderWithFactory(loader: loader,
+                                                factory: factory,
+                                                animated: animated)
     }
 }
 
@@ -83,21 +84,21 @@ public struct Pop: StoreAction {
 
 public struct ShowModal: StoreAction {
 
-    public let controllerInfo: ControlerWithFactory
+    public let controllerInfo: LoaderWithFactory
     public let withNavigationController: Bool
     public let showOverSplash: Bool
     public let showOverSelfType: Bool
 
-    public init(controller: UIViewController,
+    public init(controller: Loader<UIViewController>,
                 factory: ViewModelFactory,
                 animated: Bool = true,
                 withNavigationController: Bool = true,
                 showOverSplash: Bool = true,
                 showOverSelfType: Bool = true) {
 
-        self.controllerInfo = ControlerWithFactory(controller: controller,
-                                                   factory: factory,
-                                                   animated: animated)
+        self.controllerInfo = LoaderWithFactory(loader: controller,
+                                                factory: factory,
+                                                animated: animated)
         self.withNavigationController = withNavigationController
         self.showOverSplash = showOverSplash
         self.showOverSelfType = showOverSelfType
@@ -115,14 +116,14 @@ public struct DismissModal: StoreAction {
     }
 }
 
-public struct ControlerWithFactory {
+public struct LoaderWithFactory {
 
-    public let controller: UIViewController
+    public let loader: Loader<UIViewController>
     public let factory: ViewModelFactory
     public let animated: Bool
 
-    public init(controller: UIViewController, factory: ViewModelFactory, animated: Bool = true) {
-        self.controller = controller
+    public init(loader: Loader<UIViewController>, factory: ViewModelFactory, animated: Bool = true) {
+        self.loader = loader
         self.factory = factory
         self.animated = animated
     }

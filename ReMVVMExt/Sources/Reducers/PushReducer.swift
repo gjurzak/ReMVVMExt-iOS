@@ -78,7 +78,7 @@ public struct PushMiddleware: AnyMiddleware {
             }
 
             // push controller
-            let controller = action.controllerInfo.controller
+            let controller = action.controllerInfo.loader.load()
             //todo dg
 //            if let topViewController = navigationController.topViewController {
 //                let button = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
