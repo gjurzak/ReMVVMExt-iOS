@@ -89,14 +89,14 @@ public struct ShowModal: StoreAction {
     public let showOverSplash: Bool
     public let showOverSelfType: Bool
 
-    public init(controller: Loader<UIViewController>,
+    public init(loader: Loader<UIViewController>,
                 factory: ViewModelFactory,
                 animated: Bool = true,
                 withNavigationController: Bool = true,
                 showOverSplash: Bool = true,
                 showOverSelfType: Bool = true) {
 
-        self.controllerInfo = LoaderWithFactory(loader: controller,
+        self.controllerInfo = LoaderWithFactory(loader: loader,
                                                 factory: factory,
                                                 animated: animated)
         self.withNavigationController = withNavigationController
