@@ -66,25 +66,16 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
                     .setViewControllers([tabAction.controllerInfo.loader.load()],
                                         animated: false)
             } else {
+                let tabViewController: UIViewController = TabBarConfig.tabBarViewController()
+                (tabViewController as? TabBarViewController)?.tabItemCreator = tabAction.tabItemCreator
+                tabViewController.loadViewIfNeeded()
+                tabViewController.findNavigationController()?
+                    .setViewControllers([tabAction.controllerInfo.loader.load()],
+                                        animated: false)
 
-                let loader = Loader {
-                    let tabViewController: UIViewController = TabBarConfig.tabBarViewController()
-                    (tabViewController as? TabBarViewController)?.tabItemCreator = tabAction.tabItemCreator
-                    tabViewController.loadViewIfNeeded()
-                    tabViewController.findNavigationController()?
-                        .setViewControllers([tabAction.controllerInfo.loader.load()],
-                                            animated: false)
-
-                    uiState.setRoot(controller: tabViewController,
-                                    animated: tabAction.controllerInfo.animated,
-                                    navigationBarHidden: tabAction.navigationBarHidden)
-                    return tabViewController
-                }
-
-                dispatcher.dispatch(action: ShowOnRoot(loader: loader,
-                                                       factory: tabAction.controllerInfo.factory,
-                                                       animated: tabAction.controllerInfo.animated,
-                                                       navigationBarHidden: tabAction.navigationBarHidden))
+                uiState.setRoot(controller: tabViewController,
+                                animated: tabAction.controllerInfo.animated,
+                                navigationBarHidden: tabAction.navigationBarHidden)
             }
 
             // dismiss modals

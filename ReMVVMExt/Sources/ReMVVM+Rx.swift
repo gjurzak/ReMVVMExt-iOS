@@ -47,18 +47,18 @@ extension Reactive where Base: StateAssociated, Base: AnyStateSubject {
     }
 }
 
-#if swift(>=5.1)
-@propertyWrapper
-public struct RxStoreState<T> {
-
-    public let wrappedValue: Observable<T>
-
-    public init() {
-        wrappedValue = State.remvvm.rx.state
-    }
-
-    private struct State: StateAssociated, ReMVVMDriven {
-        public typealias State = T
-    }
-}
-#endif
+//#if swift(>=5.1)
+//@propertyWrapper
+//public struct RxStoreState<T> {
+//
+//    public let wrappedValue: Observable<T>
+//
+//    public init() {
+//        wrappedValue = State.remvvm.rx.state
+//    }
+//
+//    private struct State: StateAssociated, ReMVVMDriven {
+//        public typealias State = T
+//    }
+//}
+//#endif
