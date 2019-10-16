@@ -36,7 +36,7 @@ open class TabBarViewController: UIViewController, ReMVVMDriven {
     }
 
     private func bind(_ viewModel: TabBarViewModel) {
-
+        disposeBag = DisposeBag()
         viewModel.tabBarItemsViewModels
             .map { [unowned self] in $0.map { self.tabBarItem(for: $0) } }
             .bind(to: tabBarStackView.rx.items)
