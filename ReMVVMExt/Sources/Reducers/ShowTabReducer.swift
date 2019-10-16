@@ -52,12 +52,21 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
 
     public func onNext<State>(for state: State, action: StoreAction, interceptor: Interceptor<StoreAction, State>, dispatcher: StoreActionDispatcher) where State : StoreState {
 
-        guard let state = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
+        guard let navigationState = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
             interceptor.next(action: action)
             return
         }
 
-        guard state.currentTab != tabAction.tab else { return }
+        if let treeState = state as? NavigationTreeContainingState, treeState.navigationTree.stack.count > 1
+            && navigationState.currentTab == tabAction.tab {
+            interceptor.next(action: action) { [uiState] _ in
+                (uiState.rootViewController as? TabBarViewController)?
+                    .findNavigationController()?.popToRootViewController(animated: true)
+            }
+            return
+        }
+
+        guard navigationState.currentTab != tabAction.tab else { return }
 
         interceptor.next(action: action) { [uiState] state in
 
