@@ -44,7 +44,7 @@ public final class EndEditingFormListener<State: StoreState>: StateSubscriber {
         self.uiState = uiState
     }
 
-    public func willChange(state: State?) {
+    public func willChange(state: State) {
         uiState.rootViewController.view.endEditing(true)
         uiState.modalControllers.last?.view.endEditing(true)
     }
