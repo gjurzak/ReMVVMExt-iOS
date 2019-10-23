@@ -16,15 +16,13 @@ public final class TabBarViewModel: StateSubscriber, ReMVVMDriven {
 
     public init() {
         tabBarItemsViewModels = TabBarViewModel.remvvm.rx.state
-            .map { state in
-                return type(of: state).allTabs
-        }
-        .distinctUntilChanged()
-        .withLatestFrom(TabBarViewModel.remvvm.rx.state, resultSelector: { tabs, state -> [TabBarItemViewModel] in
-            return tabs.map {
-                TabBarItemViewModel(tab: $0, isSelected: $0 == state.currentTab)
-            }
-        })
+            .map { $0.currentTab }
+            .distinctUntilChanged()
+            .withLatestFrom(TabBarViewModel.remvvm.rx.state, resultSelector: { current, state -> [TabBarItemViewModel] in
+                return type(of: state).allTabs.map {
+                    TabBarItemViewModel(tab: $0, isSelected: $0 == current)
+                }
+            })
     }
 }
 

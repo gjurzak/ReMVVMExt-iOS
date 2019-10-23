@@ -51,7 +51,7 @@ open class TabBarItemView: UIView, ReMVVMDriven {
             .bind(to: iconImageView.rx.image)
             .disposed(by: disposeBag)
         rx.tap
-            .skipUntil(viewModel.isSelected).debug()
+            .skipUntil(viewModel.isSelected)
             .withLatestFrom(viewModel.action)
             .bind(to: remvvm.rx)
             .disposed(by: disposeBag)
