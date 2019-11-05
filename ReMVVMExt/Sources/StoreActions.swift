@@ -11,7 +11,15 @@ import ReMVVM
 import RxSwift
 
 public struct SynchronizeState: StoreAction {
-    public init() { }
+
+    public let type: SynchronizeType
+    public init(_ type: SynchronizeType) {
+        self.type = type
+    }
+
+    public enum SynchronizeType {
+        case navigation, modal
+    }
 }
 
 public struct ShowOnRoot: StoreAction {
@@ -88,13 +96,15 @@ public struct ShowModal: StoreAction {
     public let withNavigationController: Bool
     public let showOverSplash: Bool
     public let showOverSelfType: Bool
+    public let presentationStyle: UIModalPresentationStyle
 
     public init(loader: Loader<UIViewController>,
                 factory: ViewModelFactory,
                 animated: Bool = true,
                 withNavigationController: Bool = true,
                 showOverSplash: Bool = true,
-                showOverSelfType: Bool = true) {
+                showOverSelfType: Bool = true,
+                presentationStyle: UIModalPresentationStyle = .fullScreen) {
 
         self.controllerInfo = LoaderWithFactory(loader: loader,
                                                 factory: factory,
@@ -102,6 +112,7 @@ public struct ShowModal: StoreAction {
         self.withNavigationController = withNavigationController
         self.showOverSplash = showOverSplash
         self.showOverSelfType = showOverSelfType
+        self.presentationStyle = presentationStyle
     }
 }
 

@@ -16,7 +16,11 @@ struct SynchronizeStateReducer: Reducer {
     public typealias Action = SynchronizeState
 
     public static func reduce(state: NavigationTree, with action: SynchronizeState) -> NavigationTree {
-        return PopReducer.reduce(state: state, with: Pop())
+        if action.type == .navigation {
+            return PopReducer.reduce(state: state, with: Pop())
+        } else {
+            return DismissModalReducer.reduce(state: state, with: DismissModal())
+        }
     }
 }
 
@@ -39,22 +43,47 @@ public final class SynchronizeStateMiddleware: AnyMiddleware {
             return
         }
 
-        if action is SynchronizeState {
-            guard   let navigationCount = uiState.navigationController?.viewControllers.count,
-                    state.navigationTree.topStack.count > navigationCount
-            else { return }
+        if let action = action as? SynchronizeState {
 
-            interceptor.next()
+            if  action.type == .navigation,
+                let navigationCount = uiState.navigationController?.viewControllers.count,
+                state.navigationTree.topStack.count > navigationCount {
+
+                interceptor.next()
+            } else if action.type == .modal, uiState.modalControllers.last?.isBeingDismissed == true {
+                uiState.modalControllers.removeLast()
+                interceptor.next()
+            }
         } else {
             interceptor.next { [weak self] _ in
                 let disposeBag = DisposeBag()
                 self?.disposeBag = disposeBag
                 self?.uiState.navigationController?.rx.didShow
+                    .subscribe(onNext: { con in
+                        print(con.viewController)
+                        dispatcher.dispatch(action: SynchronizeState(.navigation))
+                    })
+                    .disposed(by: disposeBag)
+
+                guard   let modal = self?.uiState.modalControllers.last,
+                        modal.modalPresentationStyle != .fullScreen && modal.modalPresentationStyle != .overFullScreen
+                else { return }
+
+                modal.rx.viewDidDisappear
                     .subscribe(onNext: { _ in
-                        dispatcher.dispatch(action: SynchronizeState())
+                        dispatcher.dispatch(action: SynchronizeState(.modal))
                     })
                     .disposed(by: disposeBag)
             }
         }
     }
+}
+
+
+private extension Reactive where Base: UIViewController {
+
+  var viewDidDisappear: ControlEvent<Bool> {
+    let source = self.methodInvoked(#selector(Base.viewDidDisappear)).map { $0.first as? Bool ?? false }
+    return ControlEvent(events: source)
+  }
 }

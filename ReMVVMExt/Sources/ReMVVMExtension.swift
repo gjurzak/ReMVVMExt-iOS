@@ -19,13 +19,13 @@ public enum ReMVVMExtension {
         let uiState = UIState(window: window, config: uiStateConfig)
 
         let middleware: [AnyMiddleware] = [
+            SynchronizeStateMiddleware(uiState: uiState),
             ShowModalMiddleware(uiState: uiState),
             DismissModalMiddleware(uiState: uiState),
             ShowOnRootMiddleware(uiState: uiState),
             ShowOnTabMiddleware(uiState: uiState),
             PushMiddleware(uiState: uiState),
-            PopMiddleware(uiState: uiState),
-            SynchronizeStateMiddleware(uiState: uiState)
+            PopMiddleware(uiState: uiState)
             ] + middleware
 
         let store = Store<State>(with: state, reducer: reducer, middleware: middleware)

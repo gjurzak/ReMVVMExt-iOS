@@ -29,7 +29,7 @@ public final class UIState {
     private let window: UIWindow
     private let uiStateMainController: UINavigationController
 
-    public private(set) var modalControllers: [UIViewController] = []
+    public internal(set) var modalControllers: [UIViewController] = []
 
     public let config: UIStateConfig
 

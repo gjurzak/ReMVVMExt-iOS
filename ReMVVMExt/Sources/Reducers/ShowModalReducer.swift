@@ -78,6 +78,7 @@ public struct ShowModalMiddleware: AnyMiddleware {
                 newModal = controller ?? action.controllerInfo.loader.load()
             }
 
+            newModal.modalPresentationStyle = action.presentationStyle
             uiState.present(newModal, animated: action.controllerInfo.animated)
         }
     }
