@@ -15,10 +15,10 @@ public final class TabBarViewModel: StateSubscriber, ReMVVMDriven {
     public let tabBarItemsViewModels: Observable<[TabBarItemViewModel]>
 
     public init() {
-        tabBarItemsViewModels = TabBarViewModel.remvvm.rx.state
+        tabBarItemsViewModels = TabBarViewModel.remvvm.stateSubject.rx.state
             .map { $0.currentTab }
             .distinctUntilChanged()
-            .withLatestFrom(TabBarViewModel.remvvm.rx.state, resultSelector: { current, state -> [TabBarItemViewModel] in
+            .withLatestFrom(TabBarViewModel.remvvm.stateSubject.rx.state, resultSelector: { current, state -> [TabBarItemViewModel] in
                 return type(of: state).allTabs.map {
                     TabBarItemViewModel(tab: $0, isSelected: $0 == current)
                 }
