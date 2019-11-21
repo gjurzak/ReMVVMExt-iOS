@@ -65,7 +65,9 @@ public final class UIState {
     }
 
     public func present(_ viewController: UIViewController, animated: Bool) {
-        topPresenter.present(viewController, animated: animated, completion: nil)
+        topPresenter.present(viewController, animated: animated, completion: { [topPresenter] in
+            topPresenter.setNeedsStatusBarAppearanceUpdate()
+        })
         modalControllers.append(viewController)
     }
 
@@ -77,7 +79,9 @@ public final class UIState {
         let number = modalControllers.count >= number ? number : modalControllers.count
         guard number > 0 else { return }
         modalControllers.removeLast(number)
-        topPresenter.dismiss(animated: animated, completion: nil)
+        topPresenter.dismiss(animated: animated, completion: { [topPresenter] in
+            topPresenter.setNeedsStatusBarAppearanceUpdate()
+        })
     }
 }
 
