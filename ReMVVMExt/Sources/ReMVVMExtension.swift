@@ -13,6 +13,7 @@ public enum ReMVVMExtension {
     public static func initialize<State: StoreState>(with window: UIWindow,
                                                      uiStateConfig: UIStateConfig,
                                                      state: State,
+                                                     stateMappers: [StateMapper<State>] = [],
                                                      reducer: AnyReducer<State>,
                                                      middleware: [AnyMiddleware]) -> Store<State> {
 
@@ -28,7 +29,11 @@ public enum ReMVVMExtension {
             PopMiddleware(uiState: uiState)
             ] + middleware
 
-        let store = Store<State>(with: state, reducer: reducer, middleware: middleware)
+        let store = Store<State>(with: state,
+                                 reducer: reducer,
+                                 middleware: middleware,
+                                 stateMappers: stateMappers)
+
         store.add(subscriber: EndEditingFormListener<State>(uiState: uiState))
         ReMVVMConfig.initialize(with: store)
         return store
