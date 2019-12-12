@@ -55,7 +55,7 @@ public struct PushMiddleware: AnyMiddleware {
     public func onNext<State>(for state: State,
                             action: StoreAction,
                             interceptor: Interceptor<StoreAction, State>,
-                            dispatcher: StoreActionDispatcher) where State: StoreState {
+                            dispatcher: Dispatcher) where State: StoreState {
 
         guard state is NavigationTreeContainingState, let action = action as? Push else {
             interceptor.next()

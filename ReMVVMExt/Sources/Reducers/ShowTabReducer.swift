@@ -50,7 +50,7 @@ public struct ShowOnTabMiddleware: AnyMiddleware {
         self.uiState = uiState
     }
 
-    public func onNext<State>(for state: State, action: StoreAction, interceptor: Interceptor<StoreAction, State>, dispatcher: StoreActionDispatcher) where State : StoreState {
+    public func onNext<State>(for state: State, action: StoreAction, interceptor: Interceptor<StoreAction, State>, dispatcher: Dispatcher) where State : StoreState {
 
         guard let navigationState = state as? NavigationTabState, let tabAction = action as? ShowOnTab else {
             interceptor.next(action: action)

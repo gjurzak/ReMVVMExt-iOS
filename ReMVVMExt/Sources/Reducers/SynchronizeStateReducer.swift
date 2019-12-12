@@ -36,7 +36,7 @@ public final class SynchronizeStateMiddleware: AnyMiddleware {
     public func onNext<State>(for state: State,
                             action: StoreAction,
                             interceptor: Interceptor<StoreAction, State>,
-                            dispatcher: StoreActionDispatcher) where State: StoreState {
+                            dispatcher: Dispatcher) where State: StoreState {
 
         guard let state = state as? NavigationTreeContainingState else {
             interceptor.next()

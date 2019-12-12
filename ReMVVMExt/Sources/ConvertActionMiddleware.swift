@@ -22,7 +22,7 @@ public protocol ConvertActionMiddleware: Middleware {
 }
 
 extension ConvertActionMiddleware {
-    public func onNext(for state: ConvertState, action: Source, interceptor: Interceptor<Source, ConvertState>, dispatcher: StoreActionDispatcher) {
+    public func onNext(for state: ConvertState, action: Source, interceptor: Interceptor<Source, ConvertState>, dispatcher: Dispatcher) {
 
         dispatcher.dispatch(action: convert(action: action, state: state))
     }

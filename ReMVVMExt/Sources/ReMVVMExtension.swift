@@ -34,13 +34,13 @@ public enum ReMVVMExtension {
                                  middleware: middleware,
                                  stateMappers: stateMappers)
 
-        store.add(subscriber: EndEditingFormListener<State>(uiState: uiState))
-        ReMVVMConfig.initialize(with: store)
+        store.add(observer: EndEditingFormListener<State>(uiState: uiState))
+        ReMVVM.initialize(with: store)
         return store
     }
 }
 
-public final class EndEditingFormListener<State: StoreState>: StateSubscriber {
+public final class EndEditingFormListener<State: StoreState>: StateObserver {
 
     let uiState: UIState
     var disposeBag = DisposeBag()
