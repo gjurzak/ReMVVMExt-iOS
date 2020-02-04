@@ -20,6 +20,10 @@ let package = Package(
         .package(
             url: "https://github.com/dgrzeszczak/ReMVVM",
             .branch("feature/packageManager")
+        ),
+        .package(
+            url: "https://github.com/ReactiveX/RxSwift",
+            .exact("5.0.1")
         )
     ],
     targets: [
@@ -27,7 +31,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ReMVVMExt",
-            dependencies: ["Loaders", "ReMVVM"],
+            dependencies: ["Loaders", "ReMVVM", "RxSwift", "RxCocoa", "RxRelay"],
             path: "ReMVVMExt/Sources",
             exclude: [])
     ]
