@@ -6,6 +6,7 @@
 //  Copyright © 2019. All rights reserved.
 //
 
+import Foundation
 import ReMVVM
 import RxSwift
 import RxCocoa
