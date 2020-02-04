@@ -10,6 +10,7 @@ import Foundation
 import ReMVVM
 import RxSwift
 import RxCocoa
+import UIKit
 
 // needed to synchronize the state when user use back button or swipe gesture
 struct SynchronizeStateReducer: Reducer {
