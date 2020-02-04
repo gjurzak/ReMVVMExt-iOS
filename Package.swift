@@ -31,7 +31,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ReMVVMExt",
-            dependencies: ["Loaders", "ReMVVM", "RxSwift", "RxCocoa", "RxRelay"],
+            dependencies: ["MVVM", "Loaders", "ReMVVM", "RxSwift", "RxCocoa", "RxRelay"],
             path: "ReMVVMExt/Sources",
             exclude: [])
     ]
