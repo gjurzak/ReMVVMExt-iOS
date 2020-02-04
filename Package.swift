@@ -16,6 +16,10 @@ let package = Package(
         .package(
             url: "https://github.com/gjurzak/Loaders",
             .branch("packageManager")
+        ),
+        .package(
+            url: "https://github.com/dgrzeszczak/ReMVVM",
+            .branch("feature/packageManager")
         )
     ],
     targets: [
@@ -23,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ReMVVMExt",
-            dependencies: ["Loaders"],
+            dependencies: ["Loaders", "ReMVVM"],
             path: "ReMVVMExt/Sources",
             exclude: [])
     ]
