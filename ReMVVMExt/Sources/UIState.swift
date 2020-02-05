@@ -17,7 +17,7 @@ public struct UIStateConfig {
 
     public init(initial: @escaping () -> UIViewController,
                 customNavigation: (() -> UINavigationController)? = nil,
-                customTabBar: (() -> TabBarViewController)? = nil,
+                customTabBar: (() -> UIViewController)? = nil,
                 navigationBarHidden: Bool = true
         ) {
 
