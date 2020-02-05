@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(
-            url: "https://github.com/gjurzak/Loaders",
+            url: "https://github.com/dgrzeszczak/Loaders",
             .branch("packageManager")
         ),
         .package(
