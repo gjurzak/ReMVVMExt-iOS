@@ -65,6 +65,7 @@
 		0825183B22AA9BA50062A4EB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0825184222AA9E300062A4EB /* ReMVVMExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReMVVMExtension.swift; sourceTree = "<group>"; };
 		08C7B5C0234FBD8D000CDF1E /* ViewModelProvided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelProvided.swift; sourceTree = "<group>"; };
+		37372F2223E912D700B8641C /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8C45B5FE23293259004B4645 /* Loaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Loaders.framework; path = ../Carthage/Build/iOS/Loaders.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +89,7 @@
 		082517FB22AA8F640062A4EB = {
 			isa = PBXGroup;
 			children = (
+				37372F2223E912D700B8641C /* Package.swift */,
 				0825180722AA8F640062A4EB /* ReMVVMExt */,
 				0825180622AA8F640062A4EB /* Products */,
 				0825182822AA995B0062A4EB /* Frameworks */,

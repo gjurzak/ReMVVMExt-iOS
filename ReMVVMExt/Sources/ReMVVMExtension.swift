@@ -7,6 +7,7 @@
 
 import ReMVVM
 import RxSwift
+import UIKit
 
 public enum ReMVVMExtension {
 

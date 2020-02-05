@@ -8,6 +8,7 @@
 
 import Loaders
 import ReMVVM
+import UIKit
 
 public struct TabBarConfig {
     public static var tabBarViewController: (() -> UIViewController) = {

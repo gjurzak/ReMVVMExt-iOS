@@ -6,6 +6,7 @@
 //  Copyright © 2019 HYD. All rights reserved.
 //
 
+import Foundation
 import RxSwift
 import ReMVVM
 
