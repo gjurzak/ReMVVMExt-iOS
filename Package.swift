@@ -16,7 +16,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(
             url: "https://github.com/dgrzeszczak/Loaders",
-            .branch("packageManager")
+            .branch("feature/ViewModelDriven")
         ),
         .package(
             url: "https://github.com/dgrzeszczak/ReMVVM",
