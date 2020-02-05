@@ -10,7 +10,7 @@ import Foundation
 import ReMVVM
 import RxSwift
 
-public final class TabBarViewModel: StateObserver, ReMVVMDriven {
+public final class TabBarViewModel: Initializable, StateObserver, ReMVVMDriven {
     public typealias State = NavigationTabState
 
     public let tabBarItemsViewModels: Observable<[TabBarItemViewModel]>

@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import Loaders
 
 public struct UIStateConfig {
     let initial: () -> UIViewController
     let navigation: () -> UINavigationController
+    let tabBar: () -> UIViewController
     let navigationBarHidden: Bool
 
     public init(initial: @escaping () -> UIViewController,
                 customNavigation: (() -> UINavigationController)? = nil,
+                customTabBar: (() -> TabBarViewController)? = nil,
                 navigationBarHidden: Bool = true
         ) {
 
         self.initial = initial
         self.navigation = customNavigation ?? { UINavigationController() }
+        self.tabBar = customTabBar ?? { TabBarStoryboards.TabBar.instantiateInitialViewController() }
         self.navigationBarHidden = navigationBarHidden
     }
 }
@@ -40,6 +44,7 @@ public final class UIState {
         uiStateMainController = config.navigation()
         uiStateMainController.view.bounds = window.bounds
         uiStateMainController.setNavigationBarHidden(config.navigationBarHidden, animated: false)
+
         window.rootViewController = uiStateMainController
 
         setRoot(controller: config.initial(), animated: false, navigationBarHidden: config.navigationBarHidden)
