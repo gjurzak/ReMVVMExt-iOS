@@ -25,7 +25,7 @@ open class TabBarItemView: UIView, ReMVVMDriven {
     @IBOutlet private var iconImageView: UIImageView!
     fileprivate var tapGesture: UITapGestureRecognizer?
 
-    private let disposeBag = DisposeBag()
+    public let disposeBag = DisposeBag()
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
