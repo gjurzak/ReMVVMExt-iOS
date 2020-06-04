@@ -21,8 +21,8 @@ open class TabBarItemView: UIView, ReMVVMDriven {
         }
     }
 
-    @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var iconImageView: UIImageView!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var iconImageView: UIImageView!
     fileprivate var tapGesture: UITapGestureRecognizer?
 
     public let disposeBag = DisposeBag()
