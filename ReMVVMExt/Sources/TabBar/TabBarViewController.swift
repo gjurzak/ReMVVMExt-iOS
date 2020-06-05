@@ -17,7 +17,7 @@ open class TabBarViewController: UIViewController, ReMVVMDriven {
     open var tabItemCreator: (() -> UIView)?
     @IBOutlet private var tabBarStackView: UIStackView!
 
-    private var disposeBag = DisposeBag()
+    public var disposeBag = DisposeBag()
 
     override open var childForStatusBarStyle: UIViewController? {
         return findNavigationController()?.topViewController
@@ -35,7 +35,7 @@ open class TabBarViewController: UIViewController, ReMVVMDriven {
         disposeBag = DisposeBag()
     }
 
-    private func bind(_ viewModel: TabBarViewModel) {
+    open func bind(_ viewModel: TabBarViewModel) {
         disposeBag = DisposeBag()
         viewModel.tabBarItemsViewModels
             .map { [unowned self] in $0.map { self.tabBarItem(for: $0) } }

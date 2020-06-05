@@ -21,11 +21,11 @@ open class TabBarItemView: UIView, ReMVVMDriven {
         }
     }
 
-    @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var iconImageView: UIImageView!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var iconImageView: UIImageView!
     fileprivate var tapGesture: UITapGestureRecognizer?
 
-    private let disposeBag = DisposeBag()
+    public let disposeBag = DisposeBag()
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +43,7 @@ open class TabBarItemView: UIView, ReMVVMDriven {
         Nib.add(to: self)
     }
 
-    private func bind(_ viewModel: TabBarItemViewModel) {
+    open func bind(_ viewModel: TabBarItemViewModel) {
         viewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
         Observable.combineLatest(viewModel.isSelected, viewModel.iconImage, viewModel.iconImageActive)
             .map { $0.0 ? $0.2 : $0.1 }
