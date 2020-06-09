@@ -24,7 +24,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/ReactiveX/RxSwift",
-            .exact("5.0.1")
+            .upToNextMajor(from: "5.0.1")
         ),
         .package(url: "https://github.com/dgrzeszczak/MVVM", from: "1.0.0"),
     ],
