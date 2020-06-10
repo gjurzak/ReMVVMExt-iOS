@@ -9,6 +9,7 @@
 import Loaders
 import ReMVVM
 import RxSwift
+import UIKit
 
 public struct SynchronizeState: StoreAction {
 
